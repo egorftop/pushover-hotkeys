@@ -1,0 +1,11 @@
+bin/
+obj/
+.vs/
+TestResults/
+artifacts/
+*.user
+*.suo
+*.pfx
+.env
+.env.*
+settings.dat

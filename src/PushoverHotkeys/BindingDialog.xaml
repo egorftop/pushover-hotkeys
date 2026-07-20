@@ -1,0 +1,84 @@
+<Window x:Class="PushoverHotkeys.BindingDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Привязка клавиши"
+        Width="650"
+        Height="690"
+        MinHeight="580"
+        WindowStartupLocation="CenterOwner"
+        PreviewKeyDown="Window_PreviewKeyDown"
+        PreviewKeyUp="Window_PreviewKeyUp">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock Text="Горячая клавиша" FontWeight="SemiBold" />
+                <TextBlock x:Name="ChordText" Margin="0,5,0,0" FontSize="18" Text="Не выбрана" />
+            </StackPanel>
+            <Button Grid.Column="1" x:Name="CaptureButton" Content="Записать клавишу" Click="Capture_Click" Margin="15,5,0,0" />
+        </Grid>
+
+        <TextBlock Grid.Row="1" x:Name="CaptureHintText" Margin="0,12,0,12" Foreground="DimGray" TextWrapping="Wrap"
+                   Text="Нажмите «Записать клавишу», затем нужную стандартную клавишу или сочетание. Esc можно назначить; отмена выполняется кнопкой ниже." />
+
+        <StackPanel Grid.Row="2" Margin="0,0,0,8">
+            <TextBlock Text="Сообщение Pushover" FontWeight="SemiBold" />
+            <TextBox x:Name="MessageTextBox" Height="58" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" />
+        </StackPanel>
+
+        <Grid Grid.Row="3" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                <TextBlock Text="Срочность" />
+                <ComboBox x:Name="PriorityComboBox" />
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="Звук" />
+                <ComboBox x:Name="SoundComboBox" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                <TextBlock Text="Название (необязательно)" />
+                <TextBox x:Name="RecipientNameBox" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Margin="0,0,8,0">
+                <TextBlock Text="Pushover User / Group Key" />
+                <TextBox x:Name="RecipientKeyBox" />
+            </StackPanel>
+            <Button Grid.Column="2" Content="Добавить" VerticalAlignment="Bottom" Click="AddRecipient_Click" Margin="0,0,0,10" />
+        </Grid>
+
+        <ListBox x:Name="RecipientsList" Grid.Row="5" DisplayMemberPath="DisplayName" Margin="0,0,0,10" />
+
+        <DockPanel Grid.Row="6">
+            <Button Content="Удалить получателя" Click="RemoveRecipient_Click" DockPanel.Dock="Left" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Сохранить" Click="Save_Click" />
+                <Button Content="Отмена" IsCancel="True" Margin="0" />
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>

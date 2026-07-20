@@ -1,0 +1,65 @@
+<Window x:Class="PushoverHotkeys.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Pushover Hotkeys"
+        Width="980"
+        Height="530"
+        MinWidth="650"
+        MinHeight="420"
+        WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing">
+    <Grid Margin="18">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" LastChildFill="False">
+            <TextBlock x:Name="StatusText"
+                       VerticalAlignment="Center"
+                       FontWeight="SemiBold"
+                       TextWrapping="Wrap"
+                       DockPanel.Dock="Left" />
+            <CheckBox x:Name="HotkeysEnabledCheckBox"
+                      Content="Горячие клавиши включены"
+                      VerticalAlignment="Center"
+                      Margin="20,0,0,0"
+                      Checked="HotkeysEnabledCheckBox_Changed"
+                      Unchecked="HotkeysEnabledCheckBox_Changed"
+                      DockPanel.Dock="Right" />
+        </DockPanel>
+
+        <DockPanel Grid.Row="1" Margin="0,18,0,10">
+            <Button Content="Добавить" Click="AddBinding_Click" />
+            <Button x:Name="EditButton" Content="Изменить" Click="EditBinding_Click" IsEnabled="False" />
+            <Button x:Name="DeleteButton" Content="Удалить" Click="DeleteBinding_Click" IsEnabled="False" />
+            <Button x:Name="SendButton" Content="Отправить сейчас" Click="SendBinding_Click" IsEnabled="False" />
+            <Button Content="Настройки" Click="Settings_Click" Margin="18,0,0,0" DockPanel.Dock="Right" />
+        </DockPanel>
+
+        <DataGrid x:Name="BindingsGrid"
+                  Grid.Row="2"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  SelectionChanged="BindingsGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Горячая клавиша" Binding="{Binding ChordText}" Width="2*" />
+                <DataGridTextColumn Header="Сообщение" Binding="{Binding Message}" Width="2*" />
+                <DataGridTextColumn Header="Срочность и звук" Binding="{Binding DeliveryText}" Width="2*" />
+                <DataGridTextColumn Header="Получатели" Binding="{Binding RecipientsText}" Width="3*" />
+                <DataGridTextColumn Header="Количество" Binding="{Binding RecipientCount}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock Grid.Row="3"
+                   Margin="0,12,0,0"
+                   TextWrapping="Wrap"
+                   Foreground="DimGray"
+                   Text="Нажатие остаётся доступным активному приложению. Некоторые системные, аппаратные и повышенные приложения могут не отдавать клавиши Windows." />
+    </Grid>
+</Window>
