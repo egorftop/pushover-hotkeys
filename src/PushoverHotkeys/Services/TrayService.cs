@@ -18,7 +18,7 @@ public sealed class TrayService : IDisposable
 
         _notifyIcon = new Forms.NotifyIcon
         {
-            Icon = SystemIcons.Application,
+            Icon = LoadApplicationIcon(),
             Visible = true,
             Text = "Pushover Hotkeys",
             ContextMenuStrip = menu
@@ -55,5 +55,12 @@ public sealed class TrayService : IDisposable
         _notifyIcon.Visible = false;
         _notifyIcon.Dispose();
     }
-}
 
+    private static Icon LoadApplicationIcon()
+    {
+        var executablePath = Environment.ProcessPath;
+        return executablePath is null
+            ? SystemIcons.Application
+            : Icon.ExtractAssociatedIcon(executablePath) ?? SystemIcons.Application;
+    }
+}
