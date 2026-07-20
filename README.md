@@ -12,7 +12,7 @@
 
 ## Скачать и использовать
 
-Скачайте `PushoverHotkeysSetup.exe` со страницы [Releases](../../releases) и установите приложение.
+Скачайте `PushoverHotkeys.exe` со страницы [Releases](../../releases), поместите его в постоянную папку и запустите. Установка не требуется.
 
 1. В [Pushover](https://pushover.net/apps/build) зарегистрируйте **своё** приложение и скопируйте его App Token.
 2. Откройте «Настройки» в программе и вставьте App Token.
@@ -36,13 +36,13 @@ dotnet test .\PushoverHotkeys.sln
 dotnet build .\PushoverHotkeys.sln -c Release
 ```
 
-Для сборки установщика нужен Inno Setup 6:
+Для создания portable `.exe` выполните:
 
 ```powershell
-.\build-installer.cmd
+.\build-portable.cmd
 ```
 
-Установщик появится в `artifacts\PushoverHotkeysSetup.exe`.
+Готовый файл появится в `artifacts\PushoverHotkeys.exe`.
 
 ## Лицензия
 
